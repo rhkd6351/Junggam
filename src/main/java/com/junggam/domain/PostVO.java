@@ -1,10 +1,10 @@
 package com.junggam.domain;
 
 import lombok.*;
-        import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.CreationTimestamp;
 
-        import javax.persistence.*;
-        import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -15,7 +15,8 @@ import lombok.*;
 @Table(name = "USER_TB")
 public class PostVO {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
 
     @Column
@@ -28,12 +29,12 @@ public class PostVO {
     @CreationTimestamp
     LocalDateTime regDate;
 
-    @ManyToOne
-    @JoinColumn(name="board_idx")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_idx")
     BoardVO board;
 
-    @ManyToOne
-    @JoinColumn(name="user_idx")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_idx")
     UserVO user;
 }
 

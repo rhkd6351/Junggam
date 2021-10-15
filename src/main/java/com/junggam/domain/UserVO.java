@@ -19,10 +19,10 @@ public class UserVO {
     Long idx;
 
     @Column
-    String title;
+    String username;
 
-    @Lob
-    String content;
+    @Column
+    String password;
 
     @Column(name = "reg_date")
     @CreationTimestamp
