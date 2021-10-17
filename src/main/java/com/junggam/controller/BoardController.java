@@ -22,12 +22,12 @@ public class BoardController {
 
     @Autowired
     BoardService boardService;
-    ObjectConverter objectConverter = new ObjectConverter();
+    ObjectConverter oc = new ObjectConverter();
 
     @GetMapping("/boards")
     public ResponseEntity<List<BoardDTO>> getBoardList(){
         List<BoardVO> boardVOs = boardService.getBoardList();
-        List<BoardDTO> boardDTOs = boardVOs.stream().map(objectConverter::boardVOToDTO).collect(Collectors.toList());
+        List<BoardDTO> boardDTOs = boardVOs.stream().map(oc::boardVOToDTO).collect(Collectors.toList());
 
         return ResponseEntity.ok(boardDTOs);
     }
@@ -36,7 +36,7 @@ public class BoardController {
     public ResponseEntity<BoardDTO> getBoardByIdx(
             @PathVariable(value = "board-idx") Long boardIdx) throws NotFoundException {
         BoardVO boardVO = boardService.getBoardByIdx(boardIdx);
-        return ResponseEntity.ok(objectConverter.boardVOToDTO(boardVO));
+        return ResponseEntity.ok(oc.boardVOToDTO(boardVO));
     }
 }
 

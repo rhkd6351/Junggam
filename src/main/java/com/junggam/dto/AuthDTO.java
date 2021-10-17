@@ -14,6 +14,4 @@ import javax.persistence.*;
 public class AuthDTO {
 
     Long idx;
-
-    UserDTO user;
 }

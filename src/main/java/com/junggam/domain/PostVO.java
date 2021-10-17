@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-@Table(name = "USER_TB")
+@Table(name = "POST_TB")
 public class PostVO {
 
     @Id

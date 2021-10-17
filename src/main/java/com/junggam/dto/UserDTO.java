@@ -22,7 +22,5 @@ public class UserDTO {
 
     LocalDateTime regDate;
 
-    boolean activated;
-
     AuthDTO auth;
 }

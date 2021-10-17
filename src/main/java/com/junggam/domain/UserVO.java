@@ -1,5 +1,6 @@
 package com.junggam.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-@Table(name = "POST_TB")
+@Table(name = "USER_TB")
 public class UserVO {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +29,11 @@ public class UserVO {
     @CreationTimestamp
     LocalDateTime regDate;
 
+    @JsonIgnore
     @Column(name = "activated")
     boolean activated;
 
-    @OneToOne(mappedBy = "user", orphanRemoval = false)
+    @ManyToOne
+    @JoinColumn(name = "auth_idx")
     AuthVO auth;
 }

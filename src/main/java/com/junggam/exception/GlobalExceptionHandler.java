@@ -19,5 +19,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new MessageDTO(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<MessageDTO> Exception(Exception e){
+        return new ResponseEntity<>(new MessageDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
 }
 

@@ -17,8 +17,4 @@ public class AuthVO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
-
-    @OneToOne(targetEntity = UserVO.class)
-    @JoinColumn(name = "user_idx")
-    UserVO user;
 }

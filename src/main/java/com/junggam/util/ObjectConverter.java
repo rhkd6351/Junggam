@@ -22,6 +22,7 @@ public class ObjectConverter {
     public PostDTO postVOToDTO(PostVO vo){
         return PostDTO.builder()
                 .idx(vo.getIdx())
+                .title(vo.getTitle())
                 .content(vo.getContent())
                 .regDate(vo.getRegDate())
                 .board(this.boardVOToDTO(vo.getBoard()))
@@ -34,7 +35,6 @@ public class ObjectConverter {
                 .idx(vo.getIdx())
                 .username(vo.getUsername())
                 .password(vo.getPassword())
-                .activated(vo.isActivated())
                 .auth(this.authVOToDTO(vo.getAuth()))
                 .build();
     }
@@ -42,7 +42,6 @@ public class ObjectConverter {
     public AuthDTO authVOToDTO(AuthVO vo){
         return AuthDTO.builder()
                 .idx(vo.getIdx())
-                .user(this.userVOToDTO(vo.getUser()))
                 .build();
     }
 }
