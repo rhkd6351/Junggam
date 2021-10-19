@@ -17,4 +17,7 @@ public class AuthVO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
+
+    @Column(name = "name")
+    String name;
 }

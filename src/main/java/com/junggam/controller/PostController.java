@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class PostController {
-    static final int POST_PER_PAGE = 3;
+    static final int POST_PER_PAGE = 10;
 
     @Autowired
     PostService postService;
@@ -49,6 +49,8 @@ public class PostController {
         }else{
             throw new Exception("Invalid pno"); //TODO Exception 종류 수정
         }
+
+        posts.get(1).getUser();
 
         List<PostDTO> postDTOs = posts.stream().map(oc::postVOToDTO).collect(Collectors.toList());
         postListDTO.setPosts(postDTOs);

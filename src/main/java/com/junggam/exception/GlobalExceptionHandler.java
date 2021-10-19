@@ -3,6 +3,7 @@ package com.junggam.exception;
 
 import com.junggam.dto.MessageDTO;
 import javassist.NotFoundException;
+import javassist.bytecode.DuplicateMemberException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new MessageDTO(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<MessageDTO> Exception(Exception e){
+    @ExceptionHandler(DuplicateMemberException.class)
+    public ResponseEntity<MessageDTO> DuplicateMemberException(DuplicateMemberException e){
         return new ResponseEntity<>(new MessageDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<MessageDTO> Exception(Exception e){
+//        e.printStackTrace();
+        return new ResponseEntity<>(new MessageDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+
 
 }
 

@@ -34,7 +34,7 @@ public class ObjectConverter {
         return UserDTO.builder()
                 .idx(vo.getIdx())
                 .username(vo.getUsername())
-                .password(vo.getPassword())
+                .password(null)
                 .auth(this.authVOToDTO(vo.getAuth()))
                 .build();
     }

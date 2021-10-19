@@ -36,5 +36,6 @@ public class PostVO {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
     UserVO user;
+
 }
 

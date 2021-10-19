@@ -7,3 +7,8 @@ spring:
   jpa:
     show-sql: true
     hibernate.ddl-auto: none
+
+jwt:
+  header: Authorization
+  secret: 7KCV6rCQ7J6I64qU6rWQ7ZqMIOqwnOuwnOyekCDsnoTsmIjqtJHsoJXqsJDsnojripTqtZDtmowg6rCc67Cc7J6QIOyehOyYiOq0keygleqwkOyeiOuKlOq1kO2ajCDqsJzrsJzsnpAg7J6E7JiI6rSR
+  token-validity-in-seconds: 86400
