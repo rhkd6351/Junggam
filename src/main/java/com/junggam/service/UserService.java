@@ -9,10 +9,13 @@ import com.junggam.dto.UserDTO;
 import com.junggam.repository.AuthRepository;
 import com.junggam.repository.UserRepository;
 import com.junggam.util.SecurityUtil;
+import javassist.NotFoundException;
 import javassist.bytecode.DuplicateMemberException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.security.auth.message.AuthException;
 
 @Service
 public class UserService {
@@ -45,12 +48,21 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<UserVO> getUserWithAuthorities(String username) {
-        return userRepository.findOneWithAuthoritiesByUsername(username);
+    public UserVO getUserWithAuthorities(String username) throws NotFoundException {
+        Optional<UserVO> userVO = userRepository.findOneWithAuthoritiesByUsername(username);
+
+        if(userVO.isEmpty())
+            throw new NotFoundException("Invalid Name");
+
+        return userVO.get();
     }
 
     @Transactional(readOnly = true)
-    public Optional<UserVO> getMyUserWithAuthorities() {
-        return SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername);
+    public UserVO getMyUserWithAuthorities() throws AuthException {
+        Optional<UserVO> userVO = SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername);
+        if(userVO.isEmpty())
+            throw new AuthException("Invalid Token");
+
+        return userVO.get();
     }
 }

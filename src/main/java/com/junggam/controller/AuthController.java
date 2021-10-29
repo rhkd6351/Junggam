@@ -1,12 +1,15 @@
 package com.junggam.controller;
 
+import com.junggam.dto.MessageDTO;
 import com.junggam.dto.TokenDTO;
 import com.junggam.dto.UserDTO;
 import com.junggam.jwt.JwtFilter;
 import com.junggam.jwt.TokenProvider;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -44,5 +47,11 @@ public class AuthController {
 //        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
         return new ResponseEntity<>(new TokenDTO(jwt), HttpStatus.OK);
+    }
+
+    @PostMapping("/valid")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<MessageDTO> validCheck(){
+        return ResponseEntity.ok(MessageDTO.builder().message("valid token").build());
     }
 }

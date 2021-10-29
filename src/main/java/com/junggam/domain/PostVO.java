@@ -33,7 +33,7 @@ public class PostVO {
     @JoinColumn(name = "board_idx")
     BoardVO board;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//fetch = FetchType.LAZY
     @JoinColumn(name = "user_idx")
     UserVO user;
 

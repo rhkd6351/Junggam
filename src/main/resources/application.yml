@@ -7,8 +7,24 @@ spring:
   jpa:
     show-sql: true
     hibernate.ddl-auto: none
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+      location: /Users/lim/Desktop/pfy/temp
+#      location: /home/ubuntu/Users/lim/Desktop/pfy/temp
 
 jwt:
   header: Authorization
   secret: 7KCV6rCQ7J6I64qU6rWQ7ZqMIOqwnOuwnOyekCDsnoTsmIjqtJHsoJXqsJDsnojripTqtZDtmowg6rCc67Cc7J6QIOyehOyYiOq0keygleqwkOyeiOuKlOq1kO2ajCDqsJzrsJzsnpAg7J6E7JiI6rSR
   token-validity-in-seconds: 86400
+
+server:
+  port: 8080
+#  uri: "http://3.37.208.251:8080"
+  uri: "http://localhost:8080"
+
+img:
+#  path: /home/ubuntu/Users/lim/Desktop/pfy/static/img
+  path: /Users/lim/Desktop/pfy/static/img

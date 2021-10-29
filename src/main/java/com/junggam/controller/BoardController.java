@@ -42,7 +42,7 @@ public class BoardController {
     @GetMapping("/board/{board-idx}")
     public ResponseEntity<BoardDTO> getBoardByIdx(
             @PathVariable(value = "board-idx") Long boardIdx) throws NotFoundException {
-        Optional<UserVO> myUserWithAuthorities = userService.getMyUserWithAuthorities();
+
         BoardVO boardVO = boardService.getBoardByIdx(boardIdx);
         return ResponseEntity.ok(oc.boardVOToDTO(boardVO));
     }

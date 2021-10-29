@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity // 웹 보안 활성화 어노테이션
@@ -50,10 +51,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                );
 //    }
 
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
+                // token을 사용하는 방식이기 때문에 csrf를 disable합니다.\
+                .cors().and()
                 .csrf().disable()
 
 //                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
@@ -75,10 +78,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/api/signUp").permitAll()
                 .antMatchers("/api/authenticate").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/boards").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/board/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/img/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
 //                .antMatchers("/api/post/**").permitAll()
 
                 .anyRequest().authenticated()
